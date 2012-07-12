@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 12. Jul 2012 um 22:08
+-- Erstellungszeit: 13. Jul 2012 um 01:12
 -- Server Version: 5.5.16
 -- PHP-Version: 5.3.8
 
@@ -38,12 +38,12 @@ CREATE TABLE IF NOT EXISTS `buyer` (
 --
 
 CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`date`,`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -73,36 +73,36 @@ CREATE TABLE IF NOT EXISTS `products` (
   `title` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`,`shop`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Daten für Tabelle `products`
 --
 
 INSERT INTO `products` (`id`, `type_id`, `shop`, `title`, `price`) VALUES
-(1, 2, 1, 'Pommes (normal)', 1),
-(2, 2, 1, 'Pommes (groß)', 2),
-(3, 2, 1, 'Kartoffelspalten mit Sour Cream ', 2),
-(4, 2, 1, 'Kartoffelsalat (mit Mayo)', 2),
-(5, 2, 1, 'Kartoffelsalat (mit Speck)', 2),
-(6, 2, 1, 'Gurkensalat (selbstgemacht)', 2),
-(7, 2, 1, 'Krautsalat', 1),
-(8, 2, 1, 'Ketchup / Mayo', 0),
-(9, 2, 1, 'Sour Cream', 1),
-(10, 1, 1, '1/2 Hähnchen', 3),
-(11, 1, 1, 'Currywurst, klein', 2),
-(12, 1, 1, 'Currywurst, groß', 2),
-(13, 1, 1, 'Currywurst, nach Art des Hauses ', 2),
-(14, 1, 1, 'Bratwurst   ', 2),
-(15, 1, 1, 'Krakauer    ', 2),
-(16, 1, 1, 'Frikadelle  ', 1),
-(17, 1, 1, 'Geflügel-Frikadelle   ', 1),
-(18, 1, 1, 'Schaschlik  ', 2),
-(19, 1, 1, 'Schnitzel, paniert', 3),
-(20, 1, 1, 'Schnitzel, paniert mit Jägersauce', 4),
-(21, 1, 1, 'Schnitzel, paniert mit Zigeunersauce', 4),
-(22, 1, 1, 'Hamburger (klein, 65g)', 2),
-(23, 1, 1, 'Hamburger (groß, 225g)', 4);
+(40, 1, 1, 'Gefl&uuml;gel-Frikadelle   ', 180),
+(39, 1, 1, 'Frikadelle', 180),
+(38, 1, 1, 'Krakauer', 230),
+(37, 1, 1, 'Bratwurst', 230),
+(36, 1, 1, 'Currywurst, nach Art des Hauses ', 230),
+(35, 1, 1, 'Currywurst, gro&szlig;', 260),
+(34, 1, 1, 'Currywurst, klein', 230),
+(33, 1, 1, '1/2 H&auml;hnchen', 360),
+(32, 2, 1, 'Sour Cream', 100),
+(31, 2, 1, 'Ketchup / Mayo', 30),
+(30, 2, 1, 'Krautsalat', 170),
+(29, 2, 1, 'Gurkensalat (selbstgemacht)', 200),
+(28, 2, 1, 'Kartoffelsalat (mit Speck)', 200),
+(27, 2, 1, 'Kartoffelsalat (mit Mayo)', 200),
+(26, 2, 1, 'Kartoffelspalten mit Sour Cream ', 270),
+(25, 2, 1, 'Pommes (gro&szlig;)', 220),
+(24, 2, 1, 'Pommes (normal)', 170),
+(41, 1, 1, 'Schaschlik', 260),
+(42, 1, 1, 'Schnitzel, paniert', 320),
+(43, 1, 1, 'Schnitzel, paniert mit J&auml;gersauce', 420),
+(44, 1, 1, 'Schnitzel, paniert mit Zigeunersauce', 420),
+(45, 1, 1, 'Hamburger (klein, 65g)', 220),
+(46, 1, 1, 'Hamburger (gro&szlig;, 225g)', 490);
 
 -- --------------------------------------------------------
 
