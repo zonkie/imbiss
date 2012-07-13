@@ -2,14 +2,17 @@
 <?php require_once('__connect.php'); ?>
 
     <?php
-    if (!empty($_POST) && $_POST['action'] == 'pay_order') {
-        $sQuery = "INSERT INTO paid (user_name, paid,date) VALUES ('" . $_POST['paid_name'] . "','" . ($_POST['paid_value'] * 100) . "',now() )";
+    if (!empty($_POST) && $_POST['action'] == 'pay_order' && $_POST['paid_value'] <=99) {
+	
+        $sQuery = "INSERT INTO paid (user_name, paid,date) VALUES ('" . $_POST['paid_name'] . "','" . (str_replace(',','.',$_POST['paid_value']) * 100) . "',now() )";
         if (mysql_query($sQuery)) {
             echo "<div class='success'>" . $_POST['paid_name'] . " hat " . $_POST['paid_value'] . "&euro; Bezahlt!</div>";
         } else {
             echo "<div class='warn'>" . mysql_error() . "</div>";
         }
-    }
+    } elseif($_POST['paid_value'] >99){
+         echo "<div class='error'>Mehr als 99&euro; bezahlt? das wird ein Tippfehler sein ;)</div>";
+   }
     ?>
     <?php
     $query = mysql_query("SELECT * FROM products");
@@ -39,6 +42,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
         <link type="text/css" rel="stylesheet" href="styles.css" />
+<script>
+</script>
     </head>
     <body>
         <table style="vertical-align:top; border-collapse: border-collapse;">

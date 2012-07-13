@@ -9,7 +9,6 @@ if (isset($_POST) && !empty($_POST['action'])) {
     switch ($_POST['action']) {
         case "insert_buyer"; // Eink&auml;ufer eintragen
             $sQueryInsertBuyer = "INSERT INTO buyer VALUES ('" . $_POST['buyer'] . "',now(), '". date('Y-m-d H:i',strtotime(date('Y-m-d'). $_POST['deadline'])) ."');";
-            echo $sQueryInsertBuyer;
             if (mysql_query($sQueryInsertBuyer)) {
                 $result = "<div class='success'>K&auml;ufer eingetragen!</div>";
             } else {
@@ -31,7 +30,7 @@ if (isset($_POST) && !empty($_POST['action'])) {
                         $sQuery = "SELECT sum(price) AS gesamt FROM products WHERE id IN(" . implode(', ', $_POST['products']) . ")";
                         $query = mysql_query($sQuery); // 1= Imbiss
                         $price = mysql_fetch_array($query);
-                        $result = "<div class='success'>Bestellung eingetragen. Bitte  <div class='warn'>" . number_format($price['gesamt'] / 100, 2, ',', '.') . "&euro;</div> an den Eink&auml;ufer bezahlen!</div>";
+                        $result = "<div class='success'>Bestellung eingetragen. Bitte  <span class='warn'>" . number_format($price['gesamt'] / 100, 2, ',', '.') . "&euro;</span> an den Eink&auml;ufer bezahlen!</div>";
                     } else {
                         $result = "<div class='error'>Och n&ouml;&ouml;&ouml;&ouml;.... das hat nicht geklappt.</div>";
                     }
@@ -89,7 +88,8 @@ if (isset($_POST) && !empty($_POST['action'])) {
             <?php
         else :
             ?>
-            <h1>Der gl&uuml;ckliche Eink&auml;ufer lautet heute: <?php echo $buyer['name']; ?></h3>
+            <h1>Der gl&uuml;ckliche Eink&auml;ufer lautet heute: <?php echo $buyer['name']; ?></h3><br />
+            <h1 class="warn">Deadline: <?php echo $buyer['deadline']; ?></h3><br />
             <!-- Kauf-Formular -->
             <form action="" method="post">
                 <input type = "hidden" name = "action" value = "1">
