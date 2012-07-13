@@ -1,4 +1,6 @@
-<?php require_once('__connect.php'); ?>
+<?php require_once('__connect.php');
+error_reporting(E_ALL);
+ ?>
 
 
 <?php
@@ -23,7 +25,10 @@ if (isset($_POST) && !empty($_POST['action'])) {
                         return;
                     }
                     if ($geklappt == true) {
-                        $result = "Bestellung eingetragen: " . implode(', ', $_POST['products']);
+			$sQuery = "SELECT sum(price) AS gesamt FROM products WHERE id IN(".  implode(', ', $_POST['products']) .")";
+			$query = mysql_query($sQuery); // 1= Imbiss
+			$price = mysql_fetch_array($query);
+                        $result = "<div style='background:#cfc;border: 1px dashed #0f0;' >Bestellung eingetragen. Bitte  " . number_format($price['gesamt']/100,2,',','.') ."&euro; an den Einkäer bezahlen!</div>";
                     } else {
                         $result = "Och n&ouml;&ouml;&ouml;&ouml;.... das hat nicht geklappt.";
                     }
@@ -43,7 +48,12 @@ if (isset($_POST) && !empty($_POST['action'])) {
 }
 ?>
 <html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
     <body>
+	<h1>Bestellscript</h1>
+Achtung, Vorserienmodell ;)
         <?php
         if (!empty($result)) {
             echo $result;
@@ -56,7 +66,7 @@ if (isset($_POST) && !empty($_POST['action'])) {
         $buyer = mysql_fetch_array($query);
         ?>
         <?php
-        if (count($buyer) == 0):
+        if ($buyer==false):
             //erst käufer eintragen
             ?>
             <form action = "" method = "post">
@@ -68,17 +78,17 @@ if (isset($_POST) && !empty($_POST['action'])) {
             <?php
         else :
             ?>
-            <h1>Der gl&uuml;ckliche Eink&auml;fer lautet heute: <?php echo $buyer['name']; ?></h3>
+            <h1>Der gl&uuml;ckliche Eink&auml;ufer lautet heute: <?php echo $buyer['name']; ?></h3>
             <!-- Kauf-Formular -->
             <form action="" method="post">
                 <input type = "hidden" name = "action" value = "1">
                 <h2>Imbiss</h2>
-                <input type = "text" name = "user" placeholder="lauten wie, dein Name?"><br />
+                <input type = "text" name = "user" placeholder="Dein Name?"><br />
                 <?php
                 //Fetch Products for Imbiss
                 $query = mysql_query("SELECT * FROM products WHERE shop=1"); // 1= Imbiss
                 while ($row = mysql_fetch_array($query)) {
-                    echo "<label><input type='checkbox' name='products[]' value='" . $row['id'] . "' / >" . $row['title'] . " - " . number_format(($row['price'] / 100), 2, ',', '.') . "&euro;</label><br />";
+                    echo "<label><input type='checkbox' name='products[]' class='check_product' data-price='". $row['price'] ."' value='" . $row['id'] . "' / >" . $row['title'] . " - " . number_format(($row['price'] / 100), 2, ',', '.') . "&euro;</label><br />";
                 }
                 ?>
                 <input type="submit" value="beim Imbiss bestellen" />
@@ -87,7 +97,7 @@ if (isset($_POST) && !empty($_POST['action'])) {
             <form action="" method="post">
                 <input type = "hidden" name = "action" value = "2">
                 <h2>D&ouml;nermann</h2>
-                <input type = "text" name = "user" placeholder="lauten wie, dein Name?"><br />
+                <input type = "text" name = "user" placeholder="Dein Name?"><br />
                 <?php
                 //Fetch Products for Imbiss
                 $sQuery = mysql_query("SELECT * FROM pruducts WHERE shop=2"); // 2= D�ner
