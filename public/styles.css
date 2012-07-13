@@ -1,0 +1,34 @@
+* {
+    font-size: 12px;
+    font-family: arial, helvetica, verdana;
+}
+body {
+    color: #333;
+
+    background-image: linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
+    background-image: -o-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
+    background-image: -moz-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
+    background-image: -webkit-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
+    background-image: -ms-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.48, #CCCCCC),
+        color-stop(0.74, #EEEEEE)
+        );
+}
+.error {
+    border: 1px dashed #f00;
+    background: #fcc;
+}
+.warn {
+    border: 1px dashed #f90;
+    background: #ffc;
+}
+
+.success {
+    background:#cfc;
+    border: 1px dashed #0f0;
+}
