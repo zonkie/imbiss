@@ -134,4 +134,4 @@ if (isset($_POST) && !empty($_POST['action'])) {
 
 
 
-        <a href="list_order.php">Zur Bestell&uuml;bersicht</a>
+        <a href="list_order.php<?php if ($_GET['test'] == 1) {echo "?test=1";} ?>">Zur Bestell&uuml;bersicht</a>

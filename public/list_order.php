@@ -127,6 +127,6 @@
                 </td>
             </tr>    
         </table>
-        <a href="index.php">Zur&uuml;ck</a>
+        <a href="index.php<?php if ($_GET['test'] == 1) {echo "?test=1";} ?>">Zur&uuml;ck</a>
     </body>
 </html>

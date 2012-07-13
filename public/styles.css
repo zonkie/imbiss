@@ -4,13 +4,13 @@
 }
 body {
     color: #333;
-
+    width: 100%;
+    height: 100%;
     background-image: linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
     background-image: -o-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
     background-image: -moz-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
     background-image: -webkit-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
     background-image: -ms-linear-gradient(bottom, #CCCCCC 48%, #EEEEEE 74%);
-
     background-image: -webkit-gradient(
         linear,
         left bottom,
@@ -18,6 +18,7 @@ body {
         color-stop(0.48, #CCCCCC),
         color-stop(0.74, #EEEEEE)
         );
+    background-attachment: fixed;
 }
 .error {
     border: 1px dashed #f00;
